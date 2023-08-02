@@ -76,6 +76,11 @@ install(DIRECTORY
 )
 
 install(DIRECTORY
+  camera_info
+  DESTINATION share/${PROJECT_NAME}/
+)
+
+install(DIRECTORY
   launch
   DESTINATION share/${PROJECT_NAME}/
 )

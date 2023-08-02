@@ -1,3 +1,63 @@
+# FLIR camera driver (ROS2 Humble)
+**Description:** FLIR camera driver
+
+**Container:** `base` container.
+
+## Credits
+This repo is a fork of https://github.com/berndpfrommer/flir_spinnaker_ros2. The original README and license can be found below.   
+
+## Tested cameras:
+The following cameras have been used with this driver:
+
+- Firefly CS (USB3)
+
+## Supported platforms
+Software:
+
+- Ubuntu 22.04 LTS
+- ROS2 Humble
+- Spinnaker 3.1.0.79
+
+## Installation
+**On your host system:**
+You can get access to the spinnaker SDK from [this link](https://www.flir.eu/products/spinnaker-sdk/?vertical=machine+vision&segment=iis) (registration required).
+
+Download the Ubuntu 22.04 installation according to your architecture. Extract the folder, and follow the README inside to complete the SDK installation.
+
+**Inside the container:**
+```bash
+# inside your ament/colcon workspace src folder
+git clone https://github.com/harmony-eu/flir_camera_driver -b abb/humble-devel
+# get deps
+cd ..
+wstool init src src/flir_camera_driver/flir_spinnaker_ros2.rosinstall
+colcon build --symlink-install
+```
+
+## Usage with calibration
+**Calibration information should always be included if available**. This allows the spinnaker_camera_driver to publish the information to the camera_info topic, which is useful e.g. for rectification. Calibration information is stored in `flir_camera_driver/camera_info/<SENSOR_SN>.yaml`.
+
+## Launch files
+- If only one FLIR camera is connected to the computer:
+    ```bash
+    ros2 launch flir_spinnaker_ros2 harmony_single_cam.launch.py
+    ```
+- Launch all three FLIR cameras (back, right, left):
+    ```bash
+    ros2 launch flir_spinnaker_ros2 harmony_multi_cam.launch.py
+    ```
+    NOTE: The correct `sensor_sn` (serial numbers) need to be specified. The serial numbers can be found in the back of the firefly cameras.
+
+## Running spinview
+If you want to run **spinview**, the official Spinnaker software:
+```
+source /etc/profile.d/setup_spinnaker_paths.sh
+spinview
+```
+From **spinview** you can access camera streams and test different parameter configurations.
+
+---
+# Original README
 # FLIR/Spinnaker ROS2 driver
 
 Simple ROS2 driver for the FLIR cameras using the [Spinnaker
@@ -60,7 +120,7 @@ SpinView program. The driver has following parameters,
   service). Default: 4
 - ``dump_node_map``: set this to true to get a dump of the node map. This
   feature is helpful when hacking a new config file. Default: false.
-  
+
 
 ## How to build
 
@@ -123,7 +183,7 @@ that you can then set in your ROS2 launch file:
  "gev_scps_packet_size": 9000
 ```
 As far as setting up the camera's IP address: you can set up DHCP on
-your network or configure a static persistent IP using SpinView 
+your network or configure a static persistent IP using SpinView
 in "Transport Layer Control">"GigE Vision". Check the box for "Current
 IP Configuration Persistent IP" first to enable it, then set your
 desired addresses under "Persistent IP Address", "Persistent Subnet
@@ -198,7 +258,7 @@ camera runs its own auto exposure. The
 package can provide external automatic exposure control. To this end
 the driver publishes
 [meta data messages](https://github.com/berndpfrommer/image_meta_msgs_ros2) and
-subscribes to 
+subscribes to
 [camera control messages](https://github.com/berndpfrommer/camera_control_msgs_ros2).
 
 ## How to add new features
