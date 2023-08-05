@@ -38,13 +38,13 @@ camera_params = {
     'balance_white_auto': 'Continuous',
     # 'device_link_throughput_limit': 380000000,
     # ---- to reduce the sensor width and shift the crop
-    # 'image_width': 1408,
-    # 'image_height': 1080,
+    'image_width': 1440,
+    'image_height': 1080,
     # 'offset_x': 16,
     # 'offset_y': 0,
     'frame_rate_auto': 'Off',
     'frame_rate_enable': True,
-    # 'buffer_queue_size': 1,
+    'buffer_queue_size': 1,
     'trigger_mode': 'Off',
     'chunk_mode_active': True,
     'chunk_selector_frame_id': 'FrameID',
@@ -63,11 +63,11 @@ def generate_launch_description():
     flir_dir = get_package_share_directory('flir_spinnaker_ros2')
     config_dir = flir_dir + '/config/'
 
-    ns_arg = LaunchArg('ns', default_value='flir', description='namespace')
-    name_arg = LaunchArg('camera_name', default_value='left', description='camera name')
+    ns_arg = LaunchArg('ns', default_value='myumi_005/sensors', description='namespace')
+    name_arg = LaunchArg('camera_name', default_value='left_flir', description='camera name')
     serial_arg = LaunchArg('serial', default_value="'22112356'", description='serial number')
     camera_info_arg = LaunchArg('camera_info', default_value='22112356.yaml', description='camera info YAML file')
-    frame_rate_arg = LaunchArg('frame_rate', default_value='20', description='frame rate')
+    frame_rate_arg = LaunchArg('frame_rate', default_value='10', description='frame rate')
     frame_id_arg = LaunchArg('frame_id', default_value='flir_left_link', description='camera frame id in the TF tree e.g. flir_back_link')
     rectified_arg = LaunchArg('rectified', default_value='true', description='whether to launch a rectification node for this camera (default is false)')
 

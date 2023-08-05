@@ -39,13 +39,13 @@ camera_params = {
     'balance_white_auto': 'Continuous',
     # 'device_link_throughput_limit': 380000000,
     # ---- to reduce the sensor width and shift the crop
-    # 'image_width': 1408,
-    # 'image_height': 1080,
+    'image_width': 1440,
+    'image_height': 1080,
     # 'offset_x': 16,
     # 'offset_y': 0,
     'frame_rate_auto': 'Off',
     'frame_rate_enable': True,
-    # 'buffer_queue_size': 1,
+    'buffer_queue_size': 1,
     'trigger_mode': 'Off',
     'chunk_mode_active': True,
     'chunk_selector_frame_id': 'FrameID',
@@ -68,23 +68,23 @@ def generate_launch_description():
     ld = LaunchDescription()
     
     # Common launch args
-    ld.add_action(LaunchArg('ns', default_value='flir', description='namespace'))
-    ld.add_action(LaunchArg('frame_rate', default_value='20', description='frame rate'))
+    ld.add_action(LaunchArg('ns', default_value='myumi_005/sensors', description='namespace'))
+    ld.add_action(LaunchArg('frame_rate', default_value='15', description='frame rate'))
     ld.add_action(LaunchArg('rectified', default_value='true', description='whether to launch a rectification node for this camera'))
 
     # Camera-specific launch args
-    ld.add_action(LaunchArg('cam_0_name', default_value='left', description='camera 0 name'))
-    ld.add_action(LaunchArg('cam_1_name', default_value='right', description='camera 1 name'))
-    ld.add_action(LaunchArg('cam_2_name', default_value='back', description='camera 2 name'))
+    ld.add_action(LaunchArg('cam_0_name', default_value='left_flir', description='camera 0 name'))
+    ld.add_action(LaunchArg('cam_1_name', default_value='right_flir', description='camera 1 name'))
+    ld.add_action(LaunchArg('cam_2_name', default_value='rear_flir', description='camera 2 name'))
     ld.add_action(LaunchArg('serial_0', default_value="'22112356'", description='camera 0 serial'))
     ld.add_action(LaunchArg('serial_1', default_value="'22115684'", description='camera 1 serial'))
     ld.add_action(LaunchArg('serial_2', default_value="'22112349'", description='camera 2 serial'))
     ld.add_action(LaunchArg('cam_0_info', default_value='22112356.yaml', description='camera 0 info YAML file'))
     ld.add_action(LaunchArg('cam_1_info', default_value='22115684.yaml', description='camera 1 info YAML file'))
     ld.add_action(LaunchArg('cam_2_info', default_value='22112349.yaml', description='camera 2 info YAML file'))
-    ld.add_action(LaunchArg('frame_id_0', default_value='flir_left_link', description='camera 0 frame id in the TF tree'))
-    ld.add_action(LaunchArg('frame_id_1', default_value='flir_right_link', description='camera 1 frame id in the TF tree'))
-    ld.add_action(LaunchArg('frame_id_2', default_value='flir_back_link', description='camera 2 frame id in the TF tree'))
+    ld.add_action(LaunchArg('frame_id_0', default_value='myumi_005_left_flir_rgb_camera_link', description='camera 0 frame id in the TF tree'))
+    ld.add_action(LaunchArg('frame_id_1', default_value='myumi_005_right_flir_rgb_camera_link', description='camera 1 frame id in the TF tree'))
+    ld.add_action(LaunchArg('frame_id_2', default_value='myumi_005_rear_flir_rgb_camera_link', description='camera 2 frame id in the TF tree'))
     
     # List of (composable) camera nodes
     cam_nodes = [
