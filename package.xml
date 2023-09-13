@@ -2,7 +2,7 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>flir_spinnaker_ros2</name>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <description>ROS2 driver for flir spinnaker sdk</description>
   <author email="bernd.pfrommer@gmail.com">Bernd Pfrommer</author>
   <maintainer email="fabio.amadio@se.abb.com">Fabio Amadio</maintainer>
